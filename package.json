@@ -1,0 +1,16 @@
+{
+  "name": "isg-hukuk-akademi",
+  "version": "1.0.0",
+  "description": "6331 İSG, 4857 İş ve 6098 TBK Mevzuat & Deneme Sınavı",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Ready'"
+  },
+  "author": "DiDi İSG",
+  "license": "ISC",
+  "dependencies": {
+    "@capacitor/android": "^7.0.0",
+    "@capacitor/cli": "^7.0.0",
+    "@capacitor/core": "^7.0.0"
+  }
+}

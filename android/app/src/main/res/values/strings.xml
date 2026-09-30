@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">İSG &amp; Hukuk Akademi</string>
+    <string name="title_activity_main">İSG &amp; Hukuk Akademi</string>
+    <string name="package_name">com.isg.hukuk.akademi</string>
+    <string name="custom_url_scheme">com.isg.hukuk.akademi</string>
+</resources>

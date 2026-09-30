@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>İSG & İş Hukuku Akademi - 6331, 4857 ve 6098 Mevzuat & Sınav Portalı</title>
+  <meta name="description" content="6331 Sayılı İSG Kanunu, 4857 Sayılı İş Kanunu ve 6098 Sayılı Türk Borçlar Kanunu özetli konu anlatımları, soru bankası ve 50 soruluk deneme sınavı platformu.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- App Container -->
+  <div id="app" class="app-layout">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-box">
+          <div class="logo-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+          <div class="logo-text">
+            <h2>İSG & HUKUK</h2>
+            <span>Mevzuat & Sınav Platformu</span>
+          </div>
+        </div>
+        <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Menüyü Kapat">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">ÖĞRENME & ÇALIŞMA</div>
+        <button class="nav-btn active" data-view="topics">
+          <i class="fa-solid fa-book-open"></i>
+          <span>Özet Konu Anlatımı</span>
+          <span class="nav-badge" id="topicCountBadge">5 Modül</span>
+        </button>
+        <button class="nav-btn" data-view="flashcards">
+          <i class="fa-solid fa-bolt"></i>
+          <span>Hap Bilgiler & Kartlar</span>
+          <span class="nav-badge warm">Hızlı Ezber</span>
+        </button>
+        <button class="nav-btn" data-view="tables">
+          <i class="fa-solid fa-table-list"></i>
+          <span>Süreler & Sayılar Tablosu</span>
+        </button>
+
+        <div class="nav-section-label">ÖLÇME & SINAVLAR</div>
+        <button class="nav-btn" data-view="question-bank">
+          <i class="fa-solid fa-layer-group"></i>
+          <span>Değişken Soru Bankası</span>
+          <span class="nav-badge pulse" id="qBankCountBadge">120+ Soru</span>
+        </button>
+        <button class="nav-btn highlight-exam" data-view="mock-exam">
+          <i class="fa-solid fa-file-signature"></i>
+          <span>50 Soruluk Deneme Sınavı</span>
+          <span class="nav-badge alert">75 Dk</span>
+        </button>
+
+        <div class="nav-section-label">PERFORMANS & TEKRAR</div>
+        <button class="nav-btn" data-view="mistakes-and-saved">
+          <i class="fa-solid fa-bookmark"></i>
+          <span>Yanlışlarım & Kaydedilenler</span>
+          <span class="nav-badge" id="savedCountBadge">0</span>
+        </button>
+        <button class="nav-btn" data-view="stats">
+          <i class="fa-solid fa-chart-pie"></i>
+          <span>Gelişim & İstatistikler</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="law-quick-tags">
+          <span class="law-pill pill-isg">6331 İSG</span>
+          <span class="law-pill pill-ik">4857 İŞ</span>
+          <span class="law-pill pill-tbk">6098 TBK</span>
+        </div>
+        <div class="system-status">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Mevzuat Güncel: 2026/2027</span>
+        </div>
+        <div class="developer-credit" style="padding-top: 8px; border-top: 1px dashed var(--border-color); font-size: 0.72rem; color: var(--text-secondary); display: flex; align-items: center; gap: 6px;">
+          <i class="fa-solid fa-code" style="color: var(--primary-light);"></i>
+          <span>Geliştirici: <strong style="color: var(--text-primary);">DiDi İSG</strong></span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="main-wrapper">
+      
+      <!-- Top Navbar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle-btn" id="menuToggleBtn" aria-label="Menüyü Aç">
+            <i class="fa-solid fa-bars-staggered"></i>
+          </button>
+          <div class="page-title-box">
+            <h1 id="pageTitle">Özet Konu Anlatımı</h1>
+            <p id="pageSubtitle">6331, 4857 ve 6098 sayılı Kanunlar ve İlgili Yönetmelikler</p>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Search in topics / questions -->
+          <div class="search-box-top" id="topSearchWrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="globalSearchInput" placeholder="Mevzuat, terim veya konu ara (örn: 45 saat, risk analizi, gözetme borcu)...">
+            <button class="clear-search-btn" id="clearSearchBtn" style="display:none;"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+
+          <!-- Theme toggle -->
+          <button class="theme-toggle-btn" id="themeToggleBtn" title="Tema Değiştir (Koyu / Açık)">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+
+          <!-- Quick Stats Pill -->
+          <div class="user-score-badge" title="Toplam Çözülen / Başarı">
+            <i class="fa-solid fa-trophy"></i>
+            <span id="headerScoreText">0 Çözüldü (%0)</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dynamic Views Container -->
+      <main class="content-body" id="contentBody">
+
+        <!-- VIEW 1: KONU ANLATIMI (TOPICS) -->
+        <section id="view-topics" class="app-view active">
+          <!-- Law Filter Tabs -->
+          <div class="category-filter-bar">
+            <button class="cat-tab-btn active" data-law="all">
+              <i class="fa-solid fa-border-all"></i> Tümü
+            </button>
+            <button class="cat-tab-btn isg" data-law="6331">
+              <i class="fa-solid fa-helmet-safety"></i> 6331 Sayılı İSG Kanunu & Yönetmelikler
+            </button>
+            <button class="cat-tab-btn ik" data-law="4857">
+              <i class="fa-solid fa-briefcase"></i> 4857 Sayılı İş Kanunu
+            </button>
+            <button class="cat-tab-btn tbk" data-law="6098">
+              <i class="fa-solid fa-scale-balanced"></i> 6098 Sayılı Türk Borçlar Kanunu
+            </button>
+            <button class="cat-tab-btn yonetmelik" data-law="yonetmelik">
+              <i class="fa-solid fa-gavel"></i> Önemli İSG Yönetmelikleri
+            </button>
+          </div>
+
+          <!-- Topics Content Layout (Sidebar of Subtopics + Reading Pane) -->
+          <div class="topic-reader-grid">
+            <div class="topic-sidebar">
+              <div class="topic-sidebar-header">
+                <h3><i class="fa-solid fa-list-check"></i> Konu Başlıkları</h3>
+                <span id="topicListCount">0 Konu</span>
+              </div>
+              <div class="topic-list-scroller" id="topicListContainer">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <div class="topic-article-pane" id="topicDetailContainer">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 2: FLASHCARDS (HAP BİLGİLER) -->
+        <section id="view-flashcards" class="app-view">
+          <div class="flashcards-container">
+            <div class="view-intro-card">
+              <div class="intro-text">
+                <h2><i class="fa-solid fa-bolt text-yellow"></i> Sınav Kazandıran Hap Bilgiler & Ezber Kartları</h2>
+                <p>Sınavlarda en çok karıştırılan süreler, cezalar, çalışan sayıları ve zorunlulukları interaktif çevrilebilir kartlarla hızlıca pekiştirin.</p>
+              </div>
+              <div class="flashcard-controls-top">
+                <select id="flashcardCategoryFilter" class="modern-select">
+                  <option value="all">Tüm Konulardan Karışık</option>
+                  <option value="6331">6331 İSG Kanunu</option>
+                  <option value="4857">4857 İş Kanunu</option>
+                  <option value="6098">6098 Borçlar Kanunu</option>
+                  <option value="sureler">Süreler & Periyotlar</option>
+                  <option value="sayilar">Çalışan Sayıları & kotalar</option>
+                </select>
+                <button class="btn btn-secondary" id="shuffleFlashcardsBtn">
+                  <i class="fa-solid fa-shuffle"></i> Karıştır
+                </button>
+              </div>
+            </div>
+
+            <!-- Flashcard Display -->
+            <div class="flashcard-stage">
+              <div class="flashcard-3d-wrap">
+                <div class="flashcard-card" id="activeFlashcard">
+                  <div class="flashcard-front">
+                    <div class="fc-badge" id="fcLawBadge">6331 İSG</div>
+                    <div class="fc-hint">Soru / Kavram</div>
+                    <div class="fc-content" id="fcFrontText">Kart yükleniyor...</div>
+                    <div class="fc-action-tip"><i class="fa-solid fa-hand-pointer"></i> Kartı Çevirmek İçin Tıklayın</div>
+                  </div>
+                  <div class="flashcard-back">
+                    <div class="fc-badge success">Hap Cevap & Mevzuat Maddesi</div>
+                    <div class="fc-content" id="fcBackText">Cevap yükleniyor...</div>
+                    <div class="fc-legislation-ref" id="fcLegislationRef">Mevzuat Ref</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Navigator -->
+              <div class="flashcard-navigator">
+                <button class="btn btn-circle" id="fcPrevBtn" title="Önceki"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="fc-counter" id="fcCounter">1 / 50</div>
+                <button class="btn btn-circle" id="fcNextBtn" title="Sonraki"><i class="fa-solid fa-chevron-right"></i></button>
+                <button class="btn btn-outline" id="fcToggleSavedBtn" title="Favorilere Ekle">
+                  <i class="fa-regular fa-star" id="fcStarIcon"></i> Favorile
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 3: SÜRELER VE SAYILAR TABLOSU (TABLES) -->
+        <section id="view-tables" class="app-view">
+          <div class="tables-view-wrap">
+            <div class="view-intro-card">
+              <div class="intro-text">
+                <h2><i class="fa-solid fa-table-list text-primary"></i> Kritik Süreler, Sayılar ve Periyotlar Tablosu</h2>
+                <p>İSG Uzmanı, İşyeri Hekimi, DSP süreleri, Kurul oluşturma şartları, teftiş ve itiraz sürelerinin toplu karşılaştırma matrisi.</p>
+              </div>
+            </div>
+
+            <div class="table-card-grid" id="tablesContainer">
+              <!-- Loaded from topics.js/tables -->
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 4: DEĞİŞKEN SORU BANKASI (QUESTION BANK) -->
+        <section id="view-question-bank" class="app-view">
+          <div class="qbank-header-card">
+            <div class="qbank-filters">
+              <div class="filter-group">
+                <label><i class="fa-solid fa-gavel"></i> Mevzuat Grubu:</label>
+                <select id="qbLawFilter" class="modern-select">
+                  <option value="all">Tüm Kanun ve Yönetmelikler</option>
+                  <option value="6331">6331 Sayılı İSG Kanunu</option>
+                  <option value="4857">4857 Sayılı İş Kanunu</option>
+                  <option value="6098">6098 Sayılı Borçlar Kanunu</option>
+                  <option value="yonetmelik">İlgili Yönetmelikler</option>
+                </select>
+              </div>
+
+              <div class="filter-group">
+                <label><i class="fa-solid fa-signal"></i> Zorluk:</label>
+                <select id="qbDifficultyFilter" class="modern-select">
+                  <option value="all">Tüm Zorluk Seviyeleri</option>
+                  <option value="kolay">Temel / Kolay</option>
+                  <option value="orta">Orta (Standart Sınav)</option>
+                  <option value="zor">İleri / Çeldiricili</option>
+                </select>
+              </div>
+
+              <div class="filter-group">
+                <label><i class="fa-solid fa-filter"></i> Durum:</label>
+                <select id="qbStatusFilter" class="modern-select">
+                  <option value="all">Tüm Sorular</option>
+                  <option value="unsolved">Henüz Çözülmemiş</option>
+                  <option value="wrong">Yanlış Çözülenler</option>
+                  <option value="correct">Doğru Çözülenler</option>
+                </select>
+              </div>
+
+              <div class="filter-actions">
+                <button class="btn btn-secondary" id="qbShuffleBtn">
+                  <i class="fa-solid fa-shuffle"></i> Soruları Karıştır
+                </button>
+                <button class="btn btn-outline" id="qbResetProgressBtn">
+                  <i class="fa-solid fa-rotate-left"></i> Sıfırla
+                </button>
+              </div>
+            </div>
+
+            <div class="qbank-summary-stats">
+              <div class="stat-pill"><span class="label">Bulunan Soru:</span> <strong id="qbFilteredCount">0</strong></div>
+              <div class="stat-pill text-green"><span class="label">Doğru:</span> <strong id="qbCorrectCount">0</strong></div>
+              <div class="stat-pill text-red"><span class="label">Yanlış:</span> <strong id="qbWrongCount">0</strong></div>
+              <div class="stat-pill text-yellow"><span class="label">Başarı:</span> <strong id="qbSuccessRate">%0</strong></div>
+            </div>
+          </div>
+
+          <!-- Questions List Scroller -->
+          <div class="qbank-list-container" id="qbankListContainer">
+            <!-- Questions rendered via JS -->
+          </div>
+        </section>
+
+        <!-- VIEW 5: 50 SORULUK DENEME SINAVI (MOCK EXAM) -->
+        <section id="view-mock-exam" class="app-view">
+          
+          <!-- State 1: Exam Lobby -->
+          <div id="examLobbyState" class="exam-lobby-card">
+            <div class="lobby-badge">ÖSYM & ÇSGB SINAV STANDARDI</div>
+            <h2><i class="fa-solid fa-file-signature"></i> 50 Soruluk İSG & İş Hukuku Tam Kapsamlı Deneme Sınavı</h2>
+            <p class="lobby-desc">
+              Bu deneme sınavı <strong>6331 Sayılı İSG Kanunu (%40)</strong>, <strong>4857 Sayılı İş Kanunu (%30)</strong>, <strong>6098 Sayılı TBK (%15)</strong> ve <strong>İlgili Yönetmeliklerden (%15)</strong> ağırlıklı olarak 50 soruluk rastgele bir havuzdan derlenir.
+            </p>
+
+            <div class="exam-rules-grid">
+              <div class="rule-box">
+                <i class="fa-solid fa-clock"></i>
+                <div>
+                  <h4>Süre: 75 Dakika</h4>
+                  <p>Geri sayımlı kronometre, süre dolunca otomatik tamamlama.</p>
+                </div>
+              </div>
+              <div class="rule-box">
+                <i class="fa-solid fa-list-ol"></i>
+                <div>
+                  <h4>50 Çoktan Seçmeli Soru</h4>
+                  <p>A, B, C, D, E şıklarıyla gerçek sınav formatı.</p>
+                </div>
+              </div>
+              <div class="rule-box">
+                <i class="fa-solid fa-award"></i>
+                <div>
+                  <h4>Başarı Barajı: 70 Puan</h4>
+                  <p>En az 35 doğru soru (70/100 Puan) geçme barajıdır.</p>
+                </div>
+              </div>
+              <div class="rule-box">
+                <i class="fa-solid fa-flag"></i>
+                <div>
+                  <h4>Soru İşaretleme & Navigasyon</h4>
+                  <p>Şüpheli soruları bayrakla işaretleyip sonra dönebilme imkanı.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Exam Options -->
+            <div class="exam-setup-options">
+              <label class="checkbox-label">
+                <input type="checkbox" id="examInstantFeedbackOpt">
+                <span>Her soruda anında doğru/yanlış cevabı ve açıklamayı göster (Öğrenme Modu)</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" id="examTimerOpt" checked>
+                <span>75 Dakika Geri Sayım Sayacı Aktif Olsun (Gerçek Sınav Modu)</span>
+              </label>
+            </div>
+
+            <div class="lobby-action">
+              <button class="btn btn-primary btn-lg pulse-glow" id="startExamBtn">
+                <i class="fa-solid fa-play"></i> 50 Soruluk Denemeyi Başlat
+              </button>
+            </div>
+          </div>
+
+          <!-- State 2: Active Exam Arena -->
+          <div id="examActiveState" class="exam-arena-card" style="display: none;">
+            
+            <!-- Exam Top Bar -->
+            <div class="exam-live-header">
+              <div class="exam-info-col">
+                <span class="exam-title-chip"><i class="fa-solid fa-graduation-cap"></i> 50 Soruluk Deneme Sınavı</span>
+                <span class="exam-progress-text" id="examProgressCount">Soru 1 / 50</span>
+              </div>
+
+              <!-- Timer Display -->
+              <div class="exam-timer-box" id="examTimerDisplay">
+                <i class="fa-solid fa-stopwatch text-yellow"></i>
+                <span id="examTimerText">75:00</span>
+              </div>
+
+              <div class="exam-actions-top">
+                <button class="btn btn-danger btn-sm" id="finishExamEarlyBtn">
+                  <i class="fa-solid fa-circle-check"></i> Sınavı Bitir
+                </button>
+              </div>
+            </div>
+
+            <!-- Question and Optical Nav Grid -->
+            <div class="exam-main-grid">
+              
+              <!-- Question Area -->
+              <div class="exam-question-area">
+                <div class="exam-q-header">
+                  <div class="q-meta-badges">
+                    <span class="badge law-badge" id="examQLawBadge">6331 İSG</span>
+                    <span class="badge diff-badge" id="examQDiffBadge">Orta</span>
+                  </div>
+                  <button class="flag-question-btn" id="examFlagBtn" title="Bu soruyu işaretle / bayrakla">
+                    <i class="fa-regular fa-flag"></i> <span>Gözden Geçir</span>
+                  </button>
+                </div>
+
+                <div class="exam-q-text" id="examQText">
+                  Soru metni yükleniyor...
+                </div>
+
+                <div class="exam-q-options" id="examQOptionsContainer">
+                  <!-- Option cards generated dynamically -->
+                </div>
+
+                <!-- Instant feedback if enabled -->
+                <div class="exam-instant-feedback" id="examInstantFeedbackBox" style="display: none;">
+                  <!-- Explanation -->
+                </div>
+
+                <!-- Bottom Question Navigation Buttons -->
+                <div class="exam-nav-footer">
+                  <button class="btn btn-secondary" id="examPrevQBtn">
+                    <i class="fa-solid fa-arrow-left"></i> Önceki Soru
+                  </button>
+                  <button class="btn btn-outline" id="examClearChoiceBtn">
+                    <i class="fa-solid fa-eraser"></i> Seçimi Temizle
+                  </button>
+                  <button class="btn btn-primary" id="examNextQBtn">
+                    Sonraki Soru <i class="fa-solid fa-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Optical / Soru Haritası Sidebar -->
+              <div class="exam-optical-sidebar">
+                <div class="optical-header">
+                  <h4><i class="fa-solid fa-table-cells"></i> Soru Haritası</h4>
+                  <div class="optical-legend">
+                    <span class="legend-item"><span class="dot answered"></span> Dolu</span>
+                    <span class="legend-item"><span class="dot empty"></span> Boş</span>
+                    <span class="legend-item"><span class="dot flagged"></span> Bayraklı</span>
+                  </div>
+                </div>
+
+                <div class="optical-grid" id="examOpticalGrid">
+                  <!-- 50 buttons injected via JS -->
+                </div>
+
+                <div class="optical-summary-info">
+                  <div><span>Cevaplanan:</span> <strong id="opticalAnsweredCount">0</strong> / 50</div>
+                  <div><span>Kalan Boş:</span> <strong id="opticalEmptyCount">50</strong></div>
+                  <div><span>Bayraklı:</span> <strong id="opticalFlaggedCount">0</strong></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- State 3: Exam Result & Comprehensive Report -->
+          <div id="examResultState" class="exam-result-card" style="display: none;">
+            <!-- Injected via JS -->
+          </div>
+
+        </section>
+
+        <!-- VIEW 6: YANLIŞLARIM VE KAYDEDİLENLER (MISTAKES & SAVED) -->
+        <section id="view-mistakes-and-saved" class="app-view">
+          <div class="mistakes-view-container">
+            <div class="view-intro-card">
+              <div class="intro-text">
+                <h2><i class="fa-solid fa-bookmark text-primary"></i> Hatalı Sorular & Kaydedilen Notlar</h2>
+                <p>Çözdüğünüz testlerde veya denemelerde yanlış yaptığınız sorular ile favoriye aldığınız hap bilgileri buradan tekrar çözebilir veya inceleyebilirsiniz.</p>
+              </div>
+              <div class="mistakes-tabs">
+                <button class="btn btn-primary" id="subtabMistakesBtn"><i class="fa-solid fa-triangle-exclamation"></i> Yanlış Yapılan Sorular (<span id="badgeMistakesCount">0</span>)</button>
+                <button class="btn btn-secondary" id="subtabSavedNotesBtn"><i class="fa-solid fa-star"></i> Kaydedilen Hap Bilgiler (<span id="badgeSavedNotesCount">0</span>)</button>
+              </div>
+            </div>
+
+            <div id="mistakesListPane" class="subtab-pane active">
+              <!-- Mistakes list -->
+            </div>
+
+            <div id="savedNotesListPane" class="subtab-pane" style="display:none;">
+              <!-- Saved notes list -->
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 7: İSTATİSTİKLER & PERFORMANS (STATS) -->
+        <section id="view-stats" class="app-view">
+          <div class="stats-view-container">
+            <!-- Summary Metric Cards -->
+            <div class="metrics-grid">
+              <div class="metric-card">
+                <div class="metric-icon blue"><i class="fa-solid fa-clipboard-question"></i></div>
+                <div class="metric-data">
+                  <span class="m-val" id="statTotalSolved">0</span>
+                  <span class="m-label">Toplam Çözülen Soru</span>
+                </div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-icon green"><i class="fa-solid fa-circle-check"></i></div>
+                <div class="metric-data">
+                  <span class="m-val" id="statTotalCorrect">0</span>
+                  <span class="m-label">Doğru Sayısı</span>
+                </div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-icon red"><i class="fa-solid fa-circle-xmark"></i></div>
+                <div class="metric-data">
+                  <span class="m-val" id="statTotalWrong">0</span>
+                  <span class="m-label">Yanlış Sayısı</span>
+                </div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-icon purple"><i class="fa-solid fa-percent"></i></div>
+                <div class="metric-data">
+                  <span class="m-val" id="statOverallAccuracy">%0</span>
+                  <span class="m-label">Genel Başarı Oranı</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Subject-wise breakdown -->
+            <div class="breakdown-grid">
+              <div class="breakdown-card">
+                <h3><i class="fa-solid fa-chart-column"></i> Kanun Bazlı Başarı Analizi</h3>
+                <div class="law-progress-bars" id="lawStatsBarsContainer">
+                  <!-- Rendered dynamically -->
+                </div>
+              </div>
+
+              <div class="breakdown-card">
+                <h3><i class="fa-solid fa-clock-rotate-left"></i> Geçmiş 50 Soruluk Denemeler</h3>
+                <div class="exam-history-list" id="examHistoryContainer">
+                  <div class="empty-state-card">
+                    <i class="fa-solid fa-file-circle-question"></i>
+                    <p>Henüz tamamlanmış bir deneme sınavınız bulunmuyor.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Reset All Data Button -->
+            <div class="stats-reset-row">
+              <button class="btn btn-outline-danger" id="resetAllDataBtn">
+                <i class="fa-solid fa-trash-can"></i> Tüm İstatistik ve İlerlemeyi Sıfırla
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+  </div>
+
+  <!-- Global Modal for Full Question Explanation or Quick Info -->
+  <div class="modal-backdrop" id="appModalBackdrop" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="modalTitle">Detaylı Çözüm & Mevzuat Açıklaması</h3>
+        <button class="modal-close-btn" id="modalCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Content -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" id="modalConfirmBtn">Anladım</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/topics.js"></script>
+  <script src="js/flashcards.js"></script>
+  <script src="js/questions.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
