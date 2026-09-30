@@ -10,5 +10,6 @@ build/
 dist/
 .dart_tool/
 __pycache__/
-*.apk
+
 *.aab
+
